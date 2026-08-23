@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+@import 'tailwindcss';
+
+:root {
+  --ivory: #f7f3ed;
+  --beige: #e7ddd1;
+  --charcoal: #1e1e1e;
+  --taupe: #a89583;
+  --burgundy: #6f2335;
+  --white: #ffffff;
+  --soft-border: rgba(30, 30, 30, 0.12);
+  --shadow-soft: 0 24px 52px rgba(30, 30, 30, 0.08);
+  --container: min(1200px, calc(100% - 2.2rem));
+  --sans: 'Inter', 'Segoe UI', sans-serif;
+  --serif: 'Cormorant Garamond', 'Times New Roman', serif;
+  color: var(--charcoal);
+  background: var(--ivory);
+  font-family: var(--sans);
+  line-height: 1.6;
+  font-weight: 400;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-width: 320px;
+  overflow-x: hidden;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.18), rgba(255,255,255,0.05)),
+    var(--ivory);
+  color: var(--charcoal);
+}
+
+img { max-width: 100%; display: block; }
+
+a { color: inherit; text-decoration: none; }
+
+button, input, select, textarea { font: inherit; }
+
+#root { min-height: 100vh; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
