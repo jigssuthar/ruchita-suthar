@@ -22,7 +22,6 @@ export const personalDetails = {
 export const navigationItems = [
   { label: 'Home', href: '#home' },
   { label: 'About', href: '#about' },
-  { label: 'Portfolio', href: '#portfolio' },
   { label: 'Experience', href: '#experience' },
   { label: 'Skills', href: '#skills' },
   { label: 'Contact', href: '#contact' },
@@ -31,9 +30,9 @@ export const navigationItems = [
 export const aboutContent = {
   heading: 'Designing Stories Through Fashion & Textiles',
   intro:
-    'Ruchita Suthar is a fashion and textile professional with experience in creative development, merchandising, trend analysis and apparel production. Her work combines creative thinking with practical industry understanding to develop thoughtful, market-aware and visually refined outcomes.',
+    'I am a fashion and textile professional with experience in creative development, merchandising, trend analysis and apparel production. I combine creative thinking with practical industry understanding to develop thoughtful, market-aware and visually refined outcomes.',
   body:
-    'She holds a Bachelor of Science (Honours) in Apparel and Textiles from The Maharaja Sayajirao University of Baroda. Her professional journey includes experience in textile curation, merchandising and fashion-industry operations.',
+    'I hold a Bachelor of Science (Honours) in Apparel and Textiles from The Maharaja Sayajirao University of Baroda. My professional journey includes experience in textile curation, merchandising and fashion-industry operations.',
   education: 'B.Sc. (Hons.) Apparel and Textiles',
   position: 'Creative Associate',
   location: 'Vadodara, Gujarat, India',
@@ -283,7 +282,7 @@ export const testimonials = [
     role: 'Creative Partner',
   },
   {
-    quote: '“Her work balances aesthetic clarity with practical understanding, making each concept feel polished, wearable and market-aware.”',
+    quote: '“I balance aesthetic clarity with practical understanding, making each concept feel polished, wearable and market-aware.”',
     name: 'Studio Collaborator',
     role: 'Fashion Studio',
   },

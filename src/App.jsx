@@ -1,6 +1,6 @@
-import { useEffect, useMemo, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
-import { BrowserRouter as Router, Routes, Route, Navigate, Link, useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
 import {
   navigationItems,
@@ -8,7 +8,6 @@ import {
   aboutContent,
   statistics,
   expertise,
-  projects,
   experience,
   education,
   skillGroups,
@@ -31,7 +30,6 @@ function App() {
       <HeadMeta />
       <Routes>
         <Route path="/" element={<PortfolioHome />} />
-        <Route path="/project/:projectId" element={<ProjectDetailPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Router>
@@ -39,8 +37,6 @@ function App() {
 }
 
 function PortfolioHome() {
-  const [activeFilter, setActiveFilter] = useState('All');
-  const [selectedProject, setSelectedProject] = useState(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrollY, setScrollY] = useState(0);
 
@@ -51,19 +47,6 @@ function PortfolioHome() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  useEffect(() => {
-    const handleKeyDown = (event) => {
-      if (event.key === 'Escape' && selectedProject) setSelectedProject(null);
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [selectedProject]);
-
-  const filteredProjects = useMemo(() => {
-    if (activeFilter === 'All') return projects;
-    return projects.filter((project) => project.category === activeFilter);
-  }, [activeFilter]);
-
   return (
     <div className="portfolio-shell">
       <Navbar scrollY={scrollY} mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
@@ -72,96 +55,12 @@ function PortfolioHome() {
         <HeroSection />
         <AboutSection />
         <ExpertiseSection />
-        <PortfolioSection activeFilter={activeFilter} setActiveFilter={setActiveFilter} visibleProjects={filteredProjects} setSelectedProject={setSelectedProject} />
-        <CaseStudiesSection setSelectedProject={setSelectedProject} />
         <ExperienceSection />
         <EducationSection />
         <SkillsSection />
         <DesignProcessSection />
         <TestimonialsSection />
         <ContactSection />
-      </main>
-      <Footer />
-      <AnimatePresence>
-        {selectedProject && <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />}
-      </AnimatePresence>
-    </div>
-  );
-}
-
-function ProjectDetailPage() {
-  const { projectId } = useParams();
-  const project = projects.find((item) => item.id === projectId) || projects[0];
-  const currentIndex = projects.findIndex((item) => item.id === project.id);
-  const previousProject = projects[(currentIndex - 1 + projects.length) % projects.length];
-  const nextProject = projects[(currentIndex + 1) % projects.length];
-
-  return (
-    <div className="project-page-shell">
-      <Navbar scrollY={0} mobileOpen={false} setMobileOpen={() => {}} isDetailPage />
-      <main className="project-detail-page">
-        <motion.article initial="hidden" animate="visible" variants={sectionReveal} transition={{ duration: 0.6 }} className="project-detail-article">
-          <header className="project-detail-header">
-            <p className="eyebrow">{project.category}</p>
-            <h1>{project.title}</h1>
-            <div className="project-meta-row">
-              <span>{project.year}</span>
-              <span>•</span>
-              <span>{project.category}</span>
-            </div>
-            <img src={project.image} alt={project.title} className="project-detail-hero" />
-          </header>
-
-          <div className="project-detail-grid">
-            <section>
-              <h2>Project Overview</h2>
-              <p>{project.details.overview}</p>
-            </section>
-            <section>
-              <h2>Inspiration</h2>
-              <p>{project.details.inspiration}</p>
-            </section>
-            <section>
-              <h2>Moodboard</h2>
-              <p>{project.details.moodboard}</p>
-            </section>
-            <section>
-              <h2>Colour Palette</h2>
-              <div className="palette-row">
-                {project.details.palette.map((swatch) => (
-                  <span key={swatch} style={{ background: swatch }} aria-label="colour swatch" />
-                ))}
-              </div>
-            </section>
-            <section>
-              <h2>Fabric and Material Direction</h2>
-              <p>{project.details.materials}</p>
-            </section>
-            <section>
-              <h2>Research</h2>
-              <p>{project.details.research}</p>
-            </section>
-            <section>
-              <h2>Design Development</h2>
-              <p>{project.details.development}</p>
-            </section>
-            <section>
-              <h2>Final Outcome</h2>
-              <p>{project.details.outcome}</p>
-            </section>
-          </div>
-
-          <div className="gallery-grid">
-            {project.details.gallery.map((item, index) => (
-              <img key={`${item}-${index}`} src={item} alt={`${project.title} gallery ${index + 1}`} />
-            ))}
-          </div>
-        </motion.article>
-
-        <nav className="project-pagination" aria-label="Project navigation">
-          <Link to={`/project/${previousProject.id}`} className="project-nav-link previous-link">Previous project</Link>
-          <Link to={`/project/${nextProject.id}`} className="project-nav-link next-link">Next project</Link>
-        </nav>
       </main>
       <Footer />
     </div>
@@ -205,7 +104,7 @@ function Navbar({ scrollY, mobileOpen, setMobileOpen, isDetailPage = false }) {
           ))}
         </div>
         <div className="nav-actions">
-          <a href="#portfolio" className="primary-button nav-button">View My Work</a>
+          <a href="#contact" className="primary-button nav-button">Let’s Connect</a>
           <button
             type="button"
             className="hamburger-button"
@@ -250,7 +149,7 @@ function HeroSection() {
         <h2>{personalDetails.subheading}</h2>
         <p className="hero-description">{personalDetails.description}</p>
         <div className="hero-actions">
-          <a href="#portfolio" className="primary-button">Explore My Work</a>
+          <a href="#contact" className="primary-button">Let’s Connect</a>
           <a href={`mailto:${contactInfo.email}?subject=Request%20for%20Ruchita%20Suthar%27s%20resume`} className="secondary-button">Request Résumé</a>
         </div>
         <div className="hero-meta">
@@ -326,66 +225,6 @@ function ExpertiseSection() {
             <h3>{item.title}</h3>
             <p>{item.description}</p>
           </motion.article>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function PortfolioSection({ activeFilter, setActiveFilter, visibleProjects, setSelectedProject }) {
-  return (
-    <section id="portfolio" className="section-shell portfolio-shell">
-      <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={sectionReveal} transition={{ duration: 0.5 }} className="section-head with-row">
-        <div>
-          <p className="eyebrow">Portfolio</p>
-          <h2>Selected Work</h2>
-        </div>
-      </motion.div>
-      <div className="filter-row" aria-label="Portfolio filters">
-        {['All', 'Women’s Wear', 'Textile Design', 'Trend Research', 'Moodboards', 'Merchandising'].map((filter) => (
-          <button key={filter} type="button" className={filter === activeFilter ? 'filter-button active' : 'filter-button'} onClick={() => setActiveFilter(filter)}>{filter}</button>
-        ))}
-      </div>
-      <div className="portfolio-grid">
-        {visibleProjects.map((project, index) => (
-          <motion.article key={project.id} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.15 }} transition={{ duration: 0.45, delay: index * 0.05 }} className="project-card">
-            <div className="project-image-wrap">
-              <img src={project.image} alt={project.title} loading="lazy" />
-              <div className="project-number">{String(index + 1).padStart(2, '0')}</div>
-            </div>
-            <div className="project-body">
-              <div className="project-meta">
-                <span>{project.category}</span>
-                <span>{project.year}</span>
-              </div>
-              <h3>{project.title}</h3>
-              <p>{project.shortDescription}</p>
-              <div className="project-cta-row">
-                <button type="button" className="text-link" onClick={() => setSelectedProject(project)}>View Project</button>
-                <Link to={`/project/${project.id}`} className="text-link">Open detail</Link>
-              </div>
-            </div>
-          </motion.article>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function CaseStudiesSection({ setSelectedProject }) {
-  return (
-    <section className="section-shell case-study-shell">
-      <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={sectionReveal} transition={{ duration: 0.5 }} className="section-head">
-        <p className="eyebrow">Case Studies</p>
-        <h2>Fashion Project Narratives</h2>
-      </motion.div>
-      <div className="case-study-list">
-        {projects.slice(0, 3).map((project) => (
-          <button key={project.id} type="button" className="case-study-item" onClick={() => setSelectedProject(project)}>
-            <span className="case-study-index">{project.category}</span>
-            <strong>{project.title}</strong>
-            <span>{project.year}</span>
-          </button>
         ))}
       </div>
     </section>
@@ -636,7 +475,6 @@ function Footer() {
         </div>
         <div className="footer-links">
           <a href="#about">About</a>
-          <a href="#portfolio">Portfolio</a>
           <a href="#experience">Experience</a>
           <a href="#contact">Contact</a>
         </div>
@@ -651,42 +489,6 @@ function Footer() {
         <span>© {new Date().getFullYear()} Ruchita Suthar</span>
       </div>
     </footer>
-  );
-}
-
-function ProjectModal({ project, onClose }) {
-  useEffect(() => {
-    document.body.style.overflow = 'hidden';
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, []);
-
-  const currentIndex = projects.findIndex((item) => item.id === project.id);
-  const previousProject = projects[(currentIndex - 1 + projects.length) % projects.length];
-  const nextProject = projects[(currentIndex + 1) % projects.length];
-
-  return (
-    <motion.div className="modal-backdrop" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose}>
-      <motion.div className="project-modal" initial={{ opacity: 0, y: 26, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 20 }} transition={{ duration: 0.35 }} onClick={(event) => event.stopPropagation()} role="dialog" aria-modal="true" aria-label={`${project.title} case study`}>
-        <button type="button" className="modal-close" onClick={onClose} aria-label="Close project details">×</button>
-        <div className="modal-header">
-          <span>{project.category}</span>
-          <h3>{project.title}</h3>
-        </div>
-        <img src={project.image} alt={project.title} className="modal-image" />
-        <div className="modal-content">
-          <p>{project.details.overview}</p>
-          <div className="modal-section"><h4>Inspiration</h4><p>{project.details.inspiration}</p></div>
-          <div className="modal-section"><h4>Material Direction</h4><p>{project.details.materials}</p></div>
-          <div className="modal-section"><h4>Outcome</h4><p>{project.details.outcome}</p></div>
-        </div>
-        <div className="modal-nav">
-          <Link to={`/project/${previousProject.id}`} onClick={onClose}>Previous</Link>
-          <Link to={`/project/${nextProject.id}`} onClick={onClose}>Next</Link>
-        </div>
-      </motion.div>
-    </motion.div>
   );
 }
 
