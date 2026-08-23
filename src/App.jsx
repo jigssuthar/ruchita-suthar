@@ -177,13 +177,6 @@ function AboutSection() {
         <h2>{aboutContent.heading}</h2>
       </motion.div>
       <div className="about-layout">
-        <div className="about-image-collage">
-          <img src={personalDetails.portrait} alt="Portrait of Ruchita Suthar" />
-          <div className="mini-card">
-            <span>{aboutContent.position}</span>
-            <strong>{aboutContent.location}</strong>
-          </div>
-        </div>
         <div className="about-copy">
           <p>{aboutContent.intro}</p>
           <p>{aboutContent.body}</p>
