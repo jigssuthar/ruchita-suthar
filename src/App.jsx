@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
+import FashionAnimatedBackground from './components/FashionAnimatedBackground';
 import {
   navigationItems,
   personalDetails,
@@ -49,14 +50,7 @@ function PortfolioHome() {
 
   return (
     <div className="portfolio-shell">
-      <div className="emoji-background" aria-hidden="true">
-        <span className="floating-emoji emoji-one">✦</span>
-        <span className="floating-emoji emoji-two">✂</span>
-        <span className="floating-emoji emoji-three">🧵</span>
-        <span className="floating-emoji emoji-four">✿</span>
-        <span className="floating-emoji emoji-five">🪡</span>
-        <span className="floating-emoji emoji-six">◌</span>
-      </div>
+      <FashionAnimatedBackground />
       <Navbar scrollY={scrollY} mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
       <MobileMenu mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
       <main>
@@ -149,6 +143,7 @@ function HeroSection() {
       <div className="hero-overlay" />
       <motion.div initial="hidden" animate="visible" variants={sectionReveal} className="hero-copy" transition={{ duration: 0.7, ease: 'easeOut' }}>
         <p className="eyebrow hero-label">{personalDetails.label}</p>
+        <span className="hero-thread-line" aria-hidden="true" />
         <h1>
           {personalDetails.headline.split('\n').map((line) => (
             <span key={line}>{line}</span>
@@ -171,6 +166,7 @@ function HeroSection() {
           <img src={personalDetails.portrait} alt="Portrait of Ruchita Suthar" />
         </div>
         <div className="vertical-tag">PORTFOLIO / 2026</div>
+        <div className="creative-tag">CREATIVE DIRECTION</div>
         <div className="fabric-detail" aria-hidden="true" />
       </div>
     </section>
@@ -180,6 +176,7 @@ function HeroSection() {
 function AboutSection() {
   return (
     <section id="about" className="section-shell about-shell">
+      <span className="section-number" aria-hidden="true">01</span>
       <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={sectionReveal} transition={{ duration: 0.5 }} className="section-head">
         <p className="eyebrow">About</p>
         <h2>{aboutContent.heading}</h2>
