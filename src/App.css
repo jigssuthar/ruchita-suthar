@@ -49,8 +49,48 @@ body {
 }
 
 .portfolio-shell {
+  position: relative;
+  isolation: isolate;
   background: var(--ivory);
   color: var(--charcoal);
+}
+
+.portfolio-shell > :not(.emoji-background) {
+  position: relative;
+  z-index: 1;
+}
+
+.emoji-background {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.floating-emoji {
+  position: absolute;
+  display: block;
+  color: var(--burgundy);
+  font-family: var(--serif);
+  font-size: clamp(1.4rem, 2.5vw, 2.8rem);
+  line-height: 1;
+  opacity: 0.24;
+  filter: drop-shadow(0 8px 12px rgba(111, 35, 53, 0.12));
+  animation: emojiFloat 12s ease-in-out infinite;
+  will-change: transform;
+}
+
+.emoji-one { top: 16%; left: 8%; animation-delay: -2s; text-shadow: 0 0 18px rgba(123, 41, 65, 0.2); }
+.emoji-two { top: 34%; right: 7%; font-size: clamp(1.7rem, 3vw, 3.3rem); animation-delay: -7s; }
+.emoji-three { top: 55%; left: 5%; animation-delay: -4s; opacity: 0.2; }
+.emoji-four { top: 72%; right: 12%; color: var(--taupe); animation-delay: -10s; }
+.emoji-five { top: 86%; left: 23%; font-size: clamp(1.2rem, 2vw, 2.2rem); animation-delay: -6s; opacity: 0.18; }
+.emoji-six { top: 10%; right: 28%; color: var(--sage); animation-delay: -1s; opacity: 0.2; }
+
+@keyframes emojiFloat {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(-8deg) scale(1); }
+  50% { transform: translate3d(14px, -24px, 0) rotate(12deg) scale(1.08); }
 }
 
 .site-header {

@@ -49,6 +49,14 @@ function PortfolioHome() {
 
   return (
     <div className="portfolio-shell">
+      <div className="emoji-background" aria-hidden="true">
+        <span className="floating-emoji emoji-one">✦</span>
+        <span className="floating-emoji emoji-two">✂</span>
+        <span className="floating-emoji emoji-three">🧵</span>
+        <span className="floating-emoji emoji-four">✿</span>
+        <span className="floating-emoji emoji-five">🪡</span>
+        <span className="floating-emoji emoji-six">◌</span>
+      </div>
       <Navbar scrollY={scrollY} mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
       <MobileMenu mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
       <main>
