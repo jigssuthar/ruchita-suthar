@@ -486,6 +486,7 @@ function Footer() {
         <span>Designed with purpose, detail and a love for textiles.</span>
         <span>© {new Date().getFullYear()} Ruchita Suthar</span>
       </div>
+      <div className="footer-credit">Design by Jigs Suthar</div>
     </footer>
   );
 }

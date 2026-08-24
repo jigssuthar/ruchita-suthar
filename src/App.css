@@ -1426,6 +1426,17 @@ body {
   font-size: 0.8rem;
 }
 
+.footer-credit {
+  margin-top: 1.4rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(30,30,30,0.08);
+  text-align: center;
+  color: var(--burgundy);
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
 .project-page-shell {
   background: var(--ivory);
 }
