@@ -295,7 +295,6 @@ export const testimonials = [
 
 export const contactInfo = {
   email: 'ruchitasuthar.design@gmail.com',
-  phone: '+91 9408094831',
   linkedin: 'https://www.linkedin.com/in/ruchita-suthar-97b28a24a/',
   location: 'Vadodara, Gujarat, India',
 };

@@ -414,7 +414,6 @@ function ContactSection() {
           <p>Have a creative opportunity, collaboration or fashion project in mind? I would love to hear about it.</p>
           <div className="contact-list">
             <a href={`mailto:${contactInfo.email}`}>{contactInfo.email}</a>
-            <a href={`tel:${contactInfo.phone}`}>{contactInfo.phone}</a>
             <a href={contactInfo.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
             <a href={contactInfo.instagram} target="_blank" rel="noreferrer">Instagram</a>
             <span>{contactInfo.location}</span>
