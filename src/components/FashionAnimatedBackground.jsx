@@ -1,6 +1,5 @@
 import { useEffect, useRef } from 'react';
 import FabricWaves from './FabricWaves';
-import FloatingFashionElements from './FloatingFashionElements';
 
 function FashionAnimatedBackground() {
   const backgroundRef = useRef(null);
@@ -43,7 +42,6 @@ function FashionAnimatedBackground() {
       <div className="background-orb background-orb-blush" />
       <div className="background-grid" />
       <FabricWaves />
-      <FloatingFashionElements />
     </div>
   );
 }
